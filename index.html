@@ -1,0 +1,298 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>todolist</title>
+ <style>
+  body{
+   background-color: rgb(89, 222, 231);
+  }
+  .container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   text-align: center;
+   
+  }
+  .input{
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-size: medium;
+   padding-right: 51px;
+  
+  }
+ </style>
+</head>
+<body>
+ <div class="container">
+  <h1>TO DO LIST</h1>
+  <form class="form">
+  <input type="text" class="input" placeholder="enter the work">
+  <button class="button">SUBMIT</button>
+  </form>
+ </div>
+</body>
+<script>
+ const input=document.querySelector('.input');
+ const button=document.querySelector('.button');
+const form=document.querySelector('.form');
+const body=document.querySelector('body');
+let t=1;
+ button.addEventListener('click',function (e) {
+  e.preventDefault();
+   console.log(input.value);
+const d=document.createElement('div');
+form.appendChild(d);
+d.innerHTML=`<div class="taskk" style="height:auto;width:500px;text-align:left ;margin:5px; border:2px black solid" >TASK ${t}: ${input.value} <input class="task" type="checkbox"></div>`
+t++;
+input.value=" ";
+  body.addEventListener('click',function (q) {
+   console.log(q.target);
+   if(q.target.className==='task'){
+    console.log(q.target.parentNode);
+    const a=q.target.parentNode;
+    const b=a.parentNode;
+   // a.className="reov"
+  b.removeChild(a);
+   }
+   
+  })
+ })
+
+</script>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Todo List</title>
+ <style>
+  body {
+   background-color: rgb(89, 222, 231);
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   margin: 0;
+   padding: 0;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+  }
+  .container {
+   text-align: center;
+   border: 2px black solid;
+  }
+  .input {
+   font-size: medium;
+   padding-right: 51px;
+  }
+  .task {
+   margin: 5px;
+   border: 2px black solid;
+   /* padding: 10px; */
+   text-align: left;
+   width: 500px;
+   height: auto;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+  }
+  .input:hover{
+    background-color: black;
+    color: aliceblue;
+  }
+  .button:hover{
+      background-color: black;
+    color: aliceblue;
+  }
+ </style>
+</head>
+<body>
+ <div class="container">
+  <h1>TO DO LIST</h1>
+  <input type="text" class="input" placeholder="Enter the task">
+  <button class="button">SUBMIT</button>
+  <div class="tasks"></div>
+ </div>
+ <script>
+  const input = document.querySelector('.input');
+  const button = document.querySelector('.button');
+  const tasksContainer = document.querySelector('.tasks');
+  let taskId = 1;
+let t=[]
+  button.addEventListener('click', function (e) {
+   e.preventDefault();
+   if (input.value.trim() === '') {
+    return;
+   }
+   if(t.length<=5)t.push(tasksContainer)
+   let j=0;
+   if(t.length>=5){
+    j++;
+   let s= tasksContainer.innerHTML;
+   tasksContainer.innerHTML=s+`<div id="eli-${j}">Try to become 1.01% each day<div>`;
+   input.disabled=true;
+   button.disabled=true;
+   button.style.bgcolor='white';
+   t.pop();
+   return;
+   }
+  
+   const taskDiv = document.createElement('div');
+   taskDiv.classList.add('task');
+   taskDiv.innerHTML = `
+    <span>Task ${taskId}: ${input.value}</span>
+    <input type="checkbox" class="task-checkbox">
+   `;
+   taskDiv.id = `task-${taskId}`;
+   tasksContainer.appendChild(taskDiv);
+   taskId++;
+   input.value = '';
+  });
+
+  tasksContainer.addEventListener('click', function (e) {
+   if (e.target.classList.contains('task-checkbox')) {
+    const taskDiv = e.target.parentElement;
+    tasksContainer.removeChild(taskDiv);
+    t.pop(taskDiv);
+    console.log(t.length);
+    if(t.length<=5){
+       input.disabled=false;
+   button.disabled=false;
+    }
+   }
+  });
+ </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <style>
+      body {
+        background-color: rgb(89, 222, 231);
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        text-align: center;
+        border: 2px black solid;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+      }
+      .input {
+        font-size: medium;
+        padding: 10px;
+        margin-bottom: 10px;
+        width: calc(100% - 22px);
+      }
+      .task {
+        margin: 5px 0;
+        border: 2px black solid;
+        padding: 10px;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        transition: height 0.3s ease;
+      }
+      .input:hover,
+      .button:hover {
+        background-color: black;
+        color: white;
+      }
+      .button {
+        padding: 10px;
+        font-size: medium;
+        cursor: pointer;
+        background-color: white;
+        border: 2px black solid;
+      }
+      .limit-message {
+        color: red;
+        margin-top: 10px;
+        width: 500px;
+        height: fit-content;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>TO DO LIST</h1>
+      <input type="text" class="input" placeholder="Enter the task" />
+      <button class="button">SUBMIT</button>
+      <div class="tasks"></div>
+      <div class="limit-message"></div>
+    </div>
+    <script>
+      const input = document.querySelector(".input");
+      const button = document.querySelector(".button");
+      const tasksContainer = document.querySelector(".tasks");
+      const limitMessage = document.querySelector(".limit-message");
+      let taskId = 1;
+      const maxTasks = 5;
+
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (input.value.trim() === "") {
+          return;
+        }
+
+        const taskCount = tasksContainer.children.length;
+        if (taskCount >= maxTasks) {
+          limitMessage.textContent =
+            "Task limit reached. Complete a task to add more.";
+          input.disabled = true;
+          button.disabled = true;
+          return;
+        }
+
+        const taskDiv = document.createElement("div");
+        taskDiv.classList.add("task");
+        taskDiv.id = `task-${taskId}`;
+        taskDiv.innerHTML = `
+    <span>Task ${taskId}: ${input.value}</span>
+    <input type="checkbox" class="task-checkbox">
+   `;
+        tasksContainer.appendChild(taskDiv);
+        taskId++;
+        input.value = "";
+        limitMessage.textContent = "";
+
+        // Adjust height of tasks container to fit new task
+        tasksContainer.style.height = "auto";
+      });
+
+      tasksContainer.addEventListener("click", function (e) {
+        if (e.target.classList.contains("task-checkbox")) {
+          const taskDiv = e.target.parentElement;
+          tasksContainer.removeChild(taskDiv);
+
+          const taskCount = tasksContainer.children.length;
+          if (taskCount < maxTasks) {
+            input.disabled = false;
+            button.disabled = false;
+            limitMessage.textContent = "";
+          }
+
+          // Adjust height of tasks container to fit remaining tasks
+          tasksContainer.style.height = "auto";
+        }
+      });
+    </script>
+  </body>
+</html>
